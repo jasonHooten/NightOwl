@@ -59,7 +59,7 @@ nightowl.on('service_back', function(service, state) {
 
 nightowl.on('service_ok', function(service, state) {
   /*
-  //Do here any additional stuff when you get a successful response
+  //Do here any additional stuff when you get a successful response.
 
   console.log (service.url_info + ' responded OK! (' + state.elapsed_time + ' milliseconds, avg: '
       + state.avg_response_time + ')');
