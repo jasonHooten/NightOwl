@@ -3,7 +3,7 @@
   "name": "NightOwl",
   "scripts": {
     "test": "redis-server test/redis.conf;mocha -R list -b test/*.mocha;kill `cat test/redis.pid`",
-    "start": "redis-server redis.conf; node server.js; node webserver/app.js"
+    "start": "redis-server redis.conf; node server.js;"
   },
   "description": "A Node.js HTTP monitor",
   "version": "1.0.01",
