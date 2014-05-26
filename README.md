@@ -1,6 +1,6 @@
-# "NightOwl", a service monitor for node.js
+# NightOwl
 
-[![Build Status](https://secure.travis-ci.org/jasonhooten/nightowl.png?branch=1.x)](http://travis-ci.org/iloire/nightowl)
+[![Build Status](https://travis-ci.org/jasonHooten/NightOwl.svg)](http://travis-ci.org/jasonhooten/nightowl)
 
 ## Installation
 
