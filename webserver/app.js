@@ -5,58 +5,61 @@ var storage_factory = require ('../lib/storage/storage_factory');
 var storage = storage_factory.get_storage_instance();
 var moment = require ('moment');
 
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.register('.html', require("ejs")); //register .html extension with ejs view render
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
 
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+module.exports.start_server = function (){
+  app.configure(function(){
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'ejs');
+    app.register('.html', require("ejs")); //register .html extension with ejs view render
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(app.router);
+    app.use(express.static(__dirname + '/public'));
+  });
 
-app.configure('production', function(){
-  app.use(express.errorHandler());
-});
+  app.configure('development', function(){
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  });
 
-//-----------------------------------------
-// Import routes
-//-----------------------------------------
-require('./routes/reporting').add_routes(app, storage);
+  app.configure('production', function(){
+    app.use(express.errorHandler());
+  });
 
-var helpers = {
-    dateformat : function (req, res) {
-    return function (date, format) {
-      if (format==='ago'){
-        return moment(date).fromNow();
-      }
-      else{
-        return moment(date).format(format || 'MMM D YYYY, hh:mm');
-      }
-    };
-  }
-};
+  //-----------------------------------------
+  // Import routes
+  //-----------------------------------------
+  require('./routes/reporting').add_routes(app, storage);
 
-app.dynamicHelpers(helpers);
+  var helpers = {
+      dateformat : function (req, res) {
+      return function (date, format) {
+        if (format==='ago'){
+          return moment(date).fromNow();
+        }
+        else{
+          return moment(date).format(format || 'MMM D YYYY, hh:mm');
+        }
+      };
+    }
+  };
 
-//-----------------------------------------
-// Start server
-//-----------------------------------------
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+  app.dynamicHelpers(helpers);
 
-if (app.address())
-  console.log("NightOwl server listening on port %d in %s mode", app.address().port, app.settings.env);
-else
-  console.log ('something went wrong... couldn\'t listen to that port.');
+  //-----------------------------------------
+  // Start server
+  //-----------------------------------------
+  var port = Number(process.env.PORT || 5000);
+  app.listen(port, function() {
+    console.log("Listening on " + port);
+  });
 
-process.on('SIGINT', function () {
-  console.log('stopping web server.. bye!');
-  process.exit(0);
-});
+  if (app.address())
+    console.log("NightOwl server listening on port %d in %s mode", app.address().port, app.settings.env);
+  else
+    console.log ('something went wrong... couldn\'t listen to that port.');
+
+  process.on('SIGINT', function () {
+    console.log('stopping web server.. bye!');
+    process.exit(0);
+  });
+}

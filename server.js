@@ -94,3 +94,9 @@ process.on('SIGINT', function () {
   storage.quit();
   process.exit(0);
 });
+
+
+//-------------------------------------------------------
+// Start Web Server
+// ------------------------------------------------------
+require('./webserver/app').start_server();
