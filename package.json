@@ -2,7 +2,8 @@
   "author": "Jason Hooten <jason.hooten@gmail.com>",
   "name": "NightOwl",
   "scripts": {
-    "test": "redis-server test/redis.conf;mocha -R list -b test/*.mocha;kill `cat test/redis.pid`"
+    "test": "redis-server test/redis.conf;mocha -R list -b test/*.mocha;kill `cat test/redis.pid`",
+    "start": "redis-server redis.conf; forever start server.js; forever start webserver/app.js 8084"
   },
   "description": "A Node.js HTTP monitor",
   "version": "1.0.01",
