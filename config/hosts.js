@@ -83,5 +83,26 @@ module.exports =
           expected: {statuscode: 302}
         },
       ]
+    },
+    {
+      name:'Xero',
+      host: 'api-partner.network.xero.com',
+      protocol: 'https',
+      port:80,
+      ping_service_name: 'http',
+      timeout:5000,
+      ping_interval: one_tick,
+      failed_ping_interval: one_tick / 3,
+      warning_if_takes_more_than: 1300, //miliseconds
+      enabled: true,
+      alert_to: ['jasonh@qvinci.com'], //you can include a different email recipient per host
+      services : [
+        {
+          name: 'API',
+          method: 'get',
+          url : '/',
+          expected: {statuscode: 302}
+        }
+      ]
     }
   ];

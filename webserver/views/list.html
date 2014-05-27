@@ -1,28 +1,27 @@
 <script id='services_list_template' type="text/x-handlebars-template">
 
-<table class="table sorted table-striped table-condensed">
+<table class="table table-striped table-hover sorted">
   <thead>
-    <th width="40"></th>
-    <th width="80">Ping type</th>
+    <th>Status</th>
+    <th class="hidden-xs">Ping type</th>
     <th>Service</th>
-    <th width="80"><span title="Average response time (milliseconds)">AVG res.</span></th>
-    <th width="70">outages</th>
-    <th width="14%">last outage</th>
-    <th width="75">warnings</th>
-    <th width="14%">last warning</th>
-    <th width="10%">uptime</th>
-    <th width="90"></th>
+    <th><span title="Average response time (milliseconds)">AVG res.</span></th>
+    <th>outages</th>
+    <th>last outage</th>
+    <th class="hidden-xs">warnings</th>
+    <th class="hidden-xs">last warning</th>
+    <th class="hidden-xs">uptime</th>
+    <th class="hidden-xs">Details</th>
   </thead>
   <tbody>
 
   {{#each services}}
-  <tr class="{{#if enabled}}{{data.status}}{{else}}disabled{{/if}}">
+  <tr>
 
-    <td class="icon">
-      <span>{{data.status}}</span>
+    <td class="icon-{{data.status}}">
     </td>
 
-    <td style="text-align:center">
+    <td class="hidden-xs">
       {{ping_service_name}}
     </td>
 
@@ -31,7 +30,7 @@
         {{host.name}} / {{name}}
       </a>
       <br />
-      <span title="ping interval: {{ping_interval}} seconds" class="label">{{ping_interval}}</span>
+      <span title="ping interval: {{ping_interval}} seconds" class="label label-info">{{ping_interval}}</span>
       {{#if warning_if_takes_more_than}}
       <span title="response limit (warning): {{warning_if_takes_more_than}} milliseconds" class="label label-warning">{{warning_if_takes_more_than}}</span>
       {{/if}}
@@ -53,13 +52,13 @@
       {{data.avg_response_time}}
     </td>
 
-    <td class="error">
+    <td>
       {{#if data.outages}}
       <span class="badge badge-important">{{data.outages}}</span>
       {{/if}}
     </td>
 
-    <td class="error">
+    <td>
       {{#if data.last_outage}}
       {{dateFormat data.last_outage format="MMM Do, h:mm:ss"}}
       <br />
@@ -67,13 +66,13 @@
       {{/if}}
     </td>
 
-    <td class="warning">
+    <td class="hidden-xs">
       {{#if data.warnings}}
       <span class="badge badge-warning">{{data.warnings}}</span>
       {{/if}}
     </td>
 
-    <td class="warning">
+    <td class="hidden-xs">
       {{#if data.last_warning}}
       {{dateFormat data.last_warning format="MMM Do, h:mm:ss"}}
       <br />
@@ -81,27 +80,26 @@
       {{/if}}
     </td>
 
-    <td class="">
+    <td class="hidden-xs">
       {{#if data.uptime}}
-      {{data.uptime}}%
+        {{data.uptime}}%
       {{/if}}
       <br />
       {{#if data.up_since}}
-      <time datetime='{{dateFormat data.up_since format="MMMM Do, h:mm:ss"}}'>started {{dateFormat data.up_since ago=true}}</time>
+        <time datetime='{{dateFormat data.up_since format="MMMM Do, h:mm:ss"}}'>started {{dateFormat data.up_since ago=true}}</time>
       {{/if}}
     </td>
 
-    <td>
-      <a class="btn primary" href="/details?service={{name}}&host={{host.name}}"><i class="icon-th-list"></i> details</a>
+    <td class="hidden-xs">
+      <a class="btn btn-primary" href="/details?service={{name}}&host={{host.name}}"><i class="fa fa-cog fa-2x"></i></a>
     </td>
+
   </tr>
   {{/each}}
   </tbody>
 </table>
-</script>
 
-<span class="add-on"><i class="icon-search"></i></span>
-<input type="text" id="filter" placeholder="filter by host name"/>
+</script>
 
 <div id="data_holder"></div>
 

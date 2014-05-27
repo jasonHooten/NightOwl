@@ -2,20 +2,29 @@
 <html>
   <head>
     <title>NightOwl</title>
-    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    
+    <!-- Latest compiled and minified CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/bootstrap.extra.css' />
-    <script src="/js/vendor/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
 
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container-fluid">
-        <a class="brand" href="/">nightowl</a>
-        <div class="overview" id="totals_holder"></div>
+  <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header pull-left">
+          <a class="navbar-brand" href="/">NightOwl</a>
+          <form class="navbar-collapse collapse navbar-form navbar-left">
+            <input type="text" class="form-control col-lg-8" type="text" id="filter" placeholder="filter by host name">
+          </form>
+        </div>
+        <div class="pull-right overview" id="totals_holder"></div>
       </div>
-    </div>
   </div>
 
   <div class="container-fluid">
@@ -23,7 +32,7 @@
   </div>
 
   <footer>
-    <a target="_blank" href="https://github.com/jasonhooten/nightowl">nightowl source code (github)</a> |
+    <a target="_blank" href="https://github.com/jasonhooten/nightowl">NightOwl source code (github)</a>
   </footer>
 
   <script id='totals_template' type="text/x-handlebars-template">
@@ -33,7 +42,8 @@
     +
     <span class="total">{{disabled}}</span>
   </script>
-
+  
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="/js/vendor/handlebars-1.0.0.beta.6.js"></script>
   <script src="/js/vendor/moment.min.js" type="text/javascript"></script>
   <script src="/js/vendor/jquery.tablesorter.min.js"></script>
